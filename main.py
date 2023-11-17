@@ -5,6 +5,9 @@ import pprint
 from parser import prepare_parser
 from googlesearch import search
 
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
 EXAM = {
     "aws-scs": {
         "query": "examtopic aws certified security specialty topic 1 question",
@@ -14,6 +17,10 @@ EXAM = {
         "query": "examtopic gcp ace question",
         "keyword": "associate-cloud-engineer-topic-1-question",
     },
+    "ai-900": {
+        "query": "examtopic ai 900 question",
+        "keyword": "ai-900-topic-1-question",
+    }
 }
 
 
