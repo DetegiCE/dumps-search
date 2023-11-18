@@ -1,5 +1,5 @@
 # Dumps search for ExamTopics
-*With free tier, ExamTopic only allows us to see limited questions and answers. This tool is to generate PDF files containing any questions and discussion sessions on ExamTopic.*
+*With free tier, ExamTopic only allows us to see limited questions and answers. This tool is to generate HTML files containing any questions and discussion sessions on ExamTopic.*
 
 # Pre-requiste
 - `Python` >= `3.9`
@@ -7,6 +7,8 @@
 # Supported exams
 - Google Cloud Platform - Associate Cloud Engineer
 - Amazon Web Services - Certified Security Specialty
+- Microsoft - AI-900
+
 # Set up
 Set up virtual environment and install dependencies:
 ```bash
@@ -17,9 +19,9 @@ pip install -r requirements.txt
 
 # Usage
 ```
-usage: main.py [-h] [--start START] [--end END] [--pages PAGES [PAGES ...]] [--exam {gcp-ace,aws-scs}]
+usage: main.py [-h] [--start START] [--end END] [--pages PAGES [PAGES ...]] [--exam {gcp-ace,aws-scs,ai-900}]
 
-Generate PDFs for GCP ACE exam questions
+Generate HTMLs for GCP ACE exam questions
 
 optional arguments:
   -h, --help                    show this help message and exit
@@ -31,7 +33,7 @@ optional arguments:
 
 Example:
 
-- This will generate PDF files from question #1 to question #31 the exam AWS-SCS:
+- This will generate HTML files from question #1 to question #31 the exam AWS-SCS:
 
     ```bash
     python3 main.py --start 1 --end 31 --exam aws-scs
