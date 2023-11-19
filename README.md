@@ -6,7 +6,7 @@
 
 # Supported exams
 - Google Cloud Platform - Associate Cloud Engineer
-- Amazon Web Services - Certified Security Specialty
+- Amazon Web Services - Certified Security Specialty, SAA-C03
 - Microsoft - AI-900
 
 # Set up

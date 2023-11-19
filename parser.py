@@ -15,6 +15,6 @@ def prepare_parser():
         "--pages", default=[3,4,5], type=int, nargs="+", help="Specify pages to generate"
     )
     parser.add_argument(
-        "--exam", default="gcp-ace", choices=["gcp-ace", "aws-scs", "ai-900"], help="Exam name"
+        "--exam", default="gcp-ace", choices=["gcp-ace", "aws-scs", "ai-900", "saa-c03"], help="Exam name"
     )
     return parser

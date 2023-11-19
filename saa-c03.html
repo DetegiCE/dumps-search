@@ -1,47 +1,10 @@
-from parser import prepare_parser
-from googlesearch import search
 
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
-
-EXAM = {
-    "aws-scs": {
-        "query": "examtopic aws certified security specialty topic 1 question",
-        "keyword": "aws-certified-security-specialty-topic-1-question",
-    },
-    "gcp-ace": {
-        "query": "examtopic gcp ace question",
-        "keyword": "associate-cloud-engineer-topic-1-question",
-    },
-    "ai-900": {
-        "query": "examtopic ai 900 question",
-        "keyword": "ai-900-topic-1-question",
-    },
-    "saa-c03": {
-        "query": "examtopic saa c03 question",
-        "keyword": "exam-aws-certified-solutions-architect-associate-saa-c03",
-    }
-}
-
-
-def get_answer_url(exam_id, index):
-    query = f"{EXAM[exam_id]['query']} {index}"
-    result_urls = list(search(query, sleep_interval=1))
-
-    for url in result_urls:
-        if f"{EXAM[exam_id]['keyword']}-{index}" in url or f"{EXAM[exam_id]['keyword']}" in url:
-            print(f"Found URL for question #{index}: {url}")
-            return url
-    return None
-
-def html_template(result_urls, exam_id):
-    return f"""
     <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{exam_id}</title>
+    <title>saa-c03</title>
     <style>
 
     </style>
@@ -52,29 +15,29 @@ def html_template(result_urls, exam_id):
             <span><button id="start" onclick="notworking()" style="font-size: 20px;">START<br>NOT WORKING</button></span>
             <span><button id="prev" onclick="prev()"style="font-size: 20px;">&lt;</button></span>
             <span id="currentNumber">1</span>
-            <span>/{len(result_urls)-1}</span>
+            <span>/5</span>
             <span><button id="next" onclick="next()"style="font-size: 20px;">&gt;</button></span>
-            <input type="number" name="jumpnum" id="jumpnum" min="1" max="{len(result_urls)-1}" style="margin-left: 20px">
+            <input type="number" name="jumpnum" id="jumpnum" min="1" max="5" style="margin-left: 20px">
             <button id="jumpbtn" onclick="jump()"style="font-size: 20px;">JUMP!</button>
         </div>
         <div id="loading" style="text-align: center; font-size: 24px; color: red; margin-top: 110px;"></div>
         <div id="innerFrame" width="50%" height="600px"></div>
     </div>
     <script>
-        let problems = {str(result_urls)};
-        function gethtml(url) {{
+        let problems = ['', 'https://api.allorigins.win/get?url=https://www.examtopics.com/discussions/amazon/view/84973-exam-aws-certified-solutions-architect-associate-saa-c03/', 'https://api.allorigins.win/get?url=https://www.examtopics.com/discussions/amazon/view/84848-exam-aws-certified-solutions-architect-associate-saa-c03/', 'https://api.allorigins.win/get?url=https://www.examtopics.com/discussions/amazon/view/84838-exam-aws-certified-solutions-architect-associate-saa-c03/', 'https://api.allorigins.win/get?url=https://www.examtopics.com/discussions/amazon/view/84980-exam-aws-certified-solutions-architect-associate-saa-c03/', 'https://api.allorigins.win/get?url=https://www.examtopics.com/discussions/amazon/view/84981-exam-aws-certified-solutions-architect-associate-saa-c03/'];
+        function gethtml(url) {
             console.log(url);
-            if(url.includes('None')) {{
+            if(url.includes('None')) {
                 console.log('None', url.includes('None'));
                 document.getElementById("innerFrame").innerHTML = "<div style='color:red;'>Sorry, URL not found.</div>";
                 return;
-            }}
-            else {{
+            }
+            else {
                 console.log('Start', url.includes('None'));
                 document.getElementById("loading").innerText = 'Loading...';
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange = function() {{
-                if(xmlHttp.status == 200 && xmlHttp.readyState == xmlHttp.DONE) {{
+            xmlHttp.onreadystatechange = function() {
+                if(xmlHttp.status == 200 && xmlHttp.readyState == xmlHttp.DONE) {
                     console.log(JSON.parse(xmlHttp.responseText)['contents']);
                     let contents = JSON.parse(xmlHttp.responseText)['contents'].replaceAll('href="/', 'href="https://www.examtopics.com/')
                     contents = contents.replaceAll('src="/', 'src="https://www.examtopics.com/')
@@ -105,59 +68,45 @@ def html_template(result_urls, exam_id):
                     document.getElementById("innerFrame").innerHTML = contents;
                     document.getElementById("loading").innerText = '';
                     return;
-                }}
-            }};
+                }
+            };
 
             xmlHttp.open('GET', url, true);
 
             xmlHttp.send();
-            }}
+            }
             
-        }}
-        function notworking() {{
+        }
+        function notworking() {
             let curNum = Number(document.getElementById("currentNumber").innerText);
             gethtml(problems[curNum]);
-        }}
-        function prev() {{
+        }
+        function prev() {
             let curNum = Number(document.getElementById("currentNumber").innerText);
-            if(curNum == 1) {{
+            if(curNum == 1) {
                 alert("Can't go back");
-            }}
-            else {{
+            }
+            else {
                 document.getElementById("currentNumber").innerText = curNum - 1;
                 gethtml(problems[curNum-1]);
-            }}
-        }}
-        function next() {{
+            }
+        }
+        function next() {
             let curNum = Number(document.getElementById("currentNumber").innerText);
-            if(curNum == problems.length-1) {{
+            if(curNum == problems.length-1) {
                 alert("Can't go next");
-            }}
-            else {{
+            }
+            else {
                 document.getElementById("currentNumber").innerText = curNum + 1;
                 gethtml(problems[curNum+1]);
-            }}
-        }}
-        function jump() {{
+            }
+        }
+        function jump() {
             let jumppage = document.getElementById("jumpnum").getAttribute("value");
             document.getElementById("currentNumber").innerText = jumppage;
             gethtml(problems[jumppage]);
-        }}
+        }
     </script>
 </body>
 </html>
-    """
-
-if __name__ == "__main__":
-    options = prepare_parser().parse_args()
-    result_urls = ['',]
-
-    for index in range(options.start, options.end + 1):
-        ansurl = get_answer_url(options.exam, index)
-        result_urls.append('https://api.allorigins.win/get?url='+str(ansurl))
-
-    html = html_template(result_urls, options.exam)
     
-    f = open(f'{options.exam}.html', 'w')
-    f.write(html)
-    f.close()
