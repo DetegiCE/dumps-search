@@ -5,21 +5,20 @@
 - `Python` >= `3.9`
 
 # Supported exams
-- Google Cloud Platform - Associate Cloud Engineer
-- Amazon Web Services - Certified Security Specialty, SAA-C03
-- Microsoft - AI-900
+- Google Cloud Platform - Associate Cloud Engineer (`gcp-ace`)
+- Amazon Web Services - Certified Security Specialty (`aws-scs`)
+- AWS - SAA-C03 (`saa-c03`)
+- Microsoft - AI-900 (`ai-900`)
 
 # Set up
 Set up virtual environment and install dependencies:
 ```bash
-python3 -m venv venv
-. venv/bin/activate
 pip install -r requirements.txt
 ```
 
 # Usage
 ```
-usage: main.py [-h] [--start START] [--end END] [--pages PAGES [PAGES ...]] [--exam {gcp-ace,aws-scs,ai-900}]
+usage: main.py [-h] [--start START] [--end END] [--exam EXAMCODE]
 
 Generate HTMLs for GCP ACE exam questions
 
@@ -27,8 +26,7 @@ optional arguments:
   -h, --help                    show this help message and exit
   --start START                 first question index to query
   --end END                     last question index to query
-  --pages PAGES [PAGES ...]     specify pages to generate
-  --exam {gcp-ace,aws-scs}      exam name
+  --exam EXAMCODE               exam code (See `Supported exams` section above)
 ```
 
 Example:
