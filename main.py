@@ -48,11 +48,13 @@ def html_template(result_urls, exam_id):
             <span><button id="start" onclick="notworking()" style="font-size: 20px;">START<br>NOT WORKING</button></span>
             <span><button id="prev" onclick="prev()"style="font-size: 20px;">&lt;</button></span>
             <span id="currentNumber">1</span>
+            <span>/{len(result_urls)-1}</span>
             <span><button id="next" onclick="next()"style="font-size: 20px;">&gt;</button></span>
             <input type="number" name="jumpnum" id="jumpnum" min="1" max="{len(result_urls)-1}" style="margin-left: 20px">
             <button id="jumpbtn" onclick="jump()"style="font-size: 20px;">JUMP!</button>
         </div>
-        <div id="innerFrame" width="50%" height="600px" style="margin-top: 110px;"></div>
+        <div id="loading" style="text-align: center; font-size: 24px; color: red; margin-top: 110px;"></div>
+        <div id="innerFrame" width="50%" height="600px"></div>
     </div>
     <script>
         let problems = {str(result_urls)};
@@ -65,6 +67,7 @@ def html_template(result_urls, exam_id):
             }}
             else {{
                 console.log('Start', url.includes('None'));
+                document.getElementById("loading").innerText = 'Loading...';
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {{
                 if(xmlHttp.status == 200 && xmlHttp.readyState == xmlHttp.DONE) {{
@@ -96,6 +99,7 @@ def html_template(result_urls, exam_id):
                     contents = contents.replace('<div class="rs-toolbar">', '<div class="rs-toolbar" style="background-color: white;">')
 
                     document.getElementById("innerFrame").innerHTML = contents;
+                    document.getElementById("loading").innerText = '';
                     return;
                 }}
             }};
