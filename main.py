@@ -106,6 +106,7 @@ def html_template(result_urls, exam_id):
                     contents = beforeAD + afterAD;
 
                     contents = contents.replace('<div class="rs-toolbar">', '<div class="rs-toolbar" style="background-color: white;">')
+                    contents = contents.replace('<link rel="stylesheet" type="text/css" href="https://www.examtopics.com/assets/css/style.css?ver=1">', '')
 
                     document.getElementById("innerFrame").innerHTML = contents;
                     document.getElementById("loading").innerText = '';
