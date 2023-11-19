@@ -29,7 +29,12 @@ def get_answer_url(exam_id, index):
     result_urls = list(search(query, sleep_interval=1))
 
     for url in result_urls:
-        if f"{EXAM[exam_id]['keyword']}-{index}" in url or f"{EXAM[exam_id]['keyword']}" in url:
+        if f"{EXAM[exam_id]['keyword']}-{index}" in url:
+            print(f"Found URL for question #{index}: {url}")
+            return url
+
+    for url in result_urls:
+        if f"{EXAM[exam_id]['keyword']}" in url:
             print(f"Found URL for question #{index}: {url}")
             return url
     return None
