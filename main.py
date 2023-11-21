@@ -145,7 +145,7 @@ def html_template(result_urls, exam_id):
             }}
         }}
         function jump() {{
-            let jumppage = document.getElementById("jumpnum").getAttribute("value");
+            let jumppage = Number(document.getElementById("jumpnum").getAttribute("value"));
             document.getElementById("currentNumber").innerText = jumppage;
             gethtml(problems[jumppage]);
         }}
