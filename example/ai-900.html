@@ -103,7 +103,7 @@
             }
         }
         function jump() {
-            let jumppage = document.getElementById("jumpnum").getAttribute("value");
+            let jumppage = Number(document.getElementById("jumpnum").getAttribute("value"));
             document.getElementById("currentNumber").innerText = jumppage;
             gethtml(problems[jumppage]);
         }
