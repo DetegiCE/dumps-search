@@ -20,6 +20,10 @@ EXAM = {
     "saa-c03": {
         "query": "examtopic saa c03 question",
         "keyword": "exam-aws-certified-solutions-architect-associate-saa-c03",
+    },
+    "clf-c02": {
+        "query": "examtopics aws certified cloud practitioner clf c02 topic 1 question",
+        "keyword": "exam-aws-certified-cloud-practitioner-clf-c02-topic-1",
     }
 }
 
