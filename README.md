@@ -9,6 +9,7 @@
 - Amazon Web Services - Certified Security Specialty (`aws-scs`)
 - AWS - SAA-C03 (`saa-c03`)
 - Microsoft - AI-900 (`ai-900`)
+- AWS - CLF-C02 (`clf-c02`)
 
 # Set up
 Set up virtual environment and install dependencies:
