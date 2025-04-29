@@ -24,16 +24,22 @@ EXAM = {
     "clf-c02": {
         "query": "examtopics aws certified cloud practitioner clf c02 topic 1 question",
         "keyword": "exam-aws-certified-cloud-practitioner-clf-c02-topic-1",
+    },
+    "aif-c01": {
+        "query": "ai practitioner examtopics questions topic 1 question",
+        "keyword": "exam-aws-certified-ai-practitioner-aif-c01-topic-1-question"
     }
 }
 
 
 def get_answer_url(exam_id, index):
     query = f"{EXAM[exam_id]['query']} {index}"
+    print(query)
     try:
-        result_urls = list(search(query, sleep_interval=1))
+        result_urls = list(search(query, num_results=100, sleep_interval=1))
     except:
         result_urls = []
+    print(result_urls)
     
     for url in result_urls:
         if f"{EXAM[exam_id]['keyword']}-{index}" in url:
@@ -168,6 +174,7 @@ if __name__ == "__main__":
     for index in range(options.start, options.end + 1):
         ansurl = get_answer_url(options.exam, index)
         result_urls.append('https://api.allorigins.win/get?url='+str(ansurl))
+        print(index, result_urls[-1])
 
     html = html_template(result_urls, options.exam)
     
